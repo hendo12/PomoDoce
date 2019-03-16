@@ -24,7 +24,6 @@ export default class App extends Component {
       currentItem,
     })
   }
-
   addItem = (e) => {
     e.preventDefault()
 

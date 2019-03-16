@@ -30,7 +30,7 @@ export default class Goals extends Component {
       <li 
         key={item.key}> 
         {item} 
-        <button onClick={(item) => this.deleteGoal(item)}>Delete</button>
+        <button onClick={(item) => this.deleteGoal(item.key)}>Delete</button>
       </li>
     )
   }
