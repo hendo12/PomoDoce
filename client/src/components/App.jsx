@@ -9,38 +9,11 @@ import api from '../api';
 
 export default class App extends Component {
     state = {
-      items: [],
-      currentItem: {text:'', key:''},
       user: {},
     }
   
 
-  handleInput = (e) => {
-    console.log('Hello Input')
-    const itemText = e.target.value;
-    const currentItem = { text: itemText, key: Date.now() };
 
-    this.setState({
-      currentItem,
-    })
-  }
-  
-  addItem = (e) => {
-    e.preventDefault()
-
-    let item = e.target.item.value;
-    let allItems = [...this.state.items];
-
-    allItems.push(item);
-    this.setState(() => {
-      return {items:allItems};
-    })
-
-    
-
-    //get a copy of items and push item into it and set state
-    console.log(allItems)
-  }
 
   componentDidMount() {
     this.setUser()
@@ -96,7 +69,7 @@ export default class App extends Component {
           />
           <Route
             path='/goals'
-            render={(props) => <Goals {...props} setUser={this.setUser} addItem={this.addItem} handleInput={this.handleInput} allItems={this.state.items} />}
+            render={(props) => <Goals {...props} setUser={this.setUser}  />}
           />
           <Route
             path='/profile'
