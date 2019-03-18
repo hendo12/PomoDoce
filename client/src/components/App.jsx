@@ -10,23 +10,69 @@ import api from '../api';
 export default class App extends Component {
     state = {
       user: {},
+      newTodo: '',
+      todos: []
+    }
+
+    newTodoChanged = (event) => {
+      this.setState({
+        newTodo:event.target.value
+      })
     }
   
-
-
-
+    formSubmitted = (event) => {
+      event.preventDefault();
+  
+      this.setState({
+        newTodo: '',
+        todos:[...this.state.todos, {
+          title: this.state.newTodo, 
+          done: false
+        }]
+      })
+    }
+  
+    toggleTodoDone = (event, index) => {
+      console.log(event.target.checked)
+      const todos = [...this.state.todos] //copy the array
+      todos[index] = {...todos[index]} //copy the todo
+      todos[index].done = event.target.checked //update done property on copied todo
+      this.setState({
+        todos
+      })
+    }
+  
+    removeTodo = (index) => {
+      const todos = [...this.state.todos];
+      todos.splice(index, 1);
+  
+      this.setState({
+        todos
+      })
+  
+    }
+  
+    allDone = () => {
+      const todos = this.state.todos.map( (todo) => {
+        return {
+          title: todo.title,
+          done: true
+        }
+      })
+      this.setState({
+        todos
+      })
+    }
+  
   componentDidMount() {
     this.setUser()
   }
-
-
 
   setUser = () => {
     if (api.isLoggedIn()) {
       this.setState({ user: api.getLocalStorageUser() })
     } else {
       this.setState({ user: {} })
-
     }
   }
 
@@ -34,9 +80,7 @@ export default class App extends Component {
     api.logout()
     //this.setState({user:null})
     this.setUser()
-
   }
-
 
   render() {
     return (
@@ -69,7 +113,7 @@ export default class App extends Component {
           />
           <Route
             path='/goals'
-            render={(props) => <Goals {...props} setUser={this.setUser}  />}
+            render={(props) => <Goals {...props} setUser={this.setUser}  newTodoChanged={this.newTodoChanged} formSubmitted={this.formSubmitted} toggleTodoDone={this.toggleTodoDone} removeTodo={this.removeTodo} allDone={this.allDone} todos={this.state.todos} newTodo={this.state.newTodo} />}
           />
           <Route
             path='/profile'
