@@ -6,6 +6,7 @@ import Signup from './pages/Signup';
 import Goals from './pages/Goals';
 import Profile from './pages/Profile';
 import api from '../api';
+import axios from 'axios'
 
 export default class App extends Component {
     state = {
@@ -13,7 +14,7 @@ export default class App extends Component {
       newTodo: '',
       todos: []
     }
-
+/*---------------------------------------------------Todo Functionality-----------------------------------------------------*/
     newTodoChanged = (event) => {
       this.setState({
         newTodo:event.target.value
@@ -22,16 +23,20 @@ export default class App extends Component {
   
     formSubmitted = (event) => {
       event.preventDefault();
-  
-      this.setState({
-        newTodo: '',
-        todos:[...this.state.todos, {
-          title: this.state.newTodo, 
-          done: false
-        }]
+      //save to the db 
+      let todos = [...this.state.todos, {
+        title: this.state.newTodo, 
+        done: false
+      }]
+      axios.post('http://localhost:5000/api/replaceAllTodos', {todos}).then(res=>{
+
+        this.setState({
+          newTodo: '',
+          todos:todos
+        })
       })
     }
-  
+
     toggleTodoDone = (event, index) => {
       console.log(event.target.checked)
       const todos = [...this.state.todos] //copy the array
@@ -63,7 +68,7 @@ export default class App extends Component {
         todos
       })
     }
-  
+  /*----------------------------------------------------User Login functionality------------------------------------------------*/
   componentDidMount() {
     this.setUser()
   }
@@ -81,6 +86,66 @@ export default class App extends Component {
     //this.setState({user:null})
     this.setUser()
   }
+
+  /*----------------------------------------------------Timer functionality------------------------------------------------*/
+pIntervals = (time) => {
+    var round;
+    console.log(time/1000, time < 2000);
+    switch (true) {
+      case time < 90000:
+        round = "first";
+        break;
+      case time < 108000:
+        round = "second";
+        break;
+      case time < 198000:
+        round = "third";
+        break;
+      case time < 216000:
+        round = "fourth";
+        break;
+      case time < 306000:
+        round = "fifth";
+        break;
+      case time < 324000:
+        round = "sixth";
+        break;
+      case time < 414000:
+        round = "7th";
+        break;
+      case time < 486000:
+        round = "8th";
+        break;
+      default: 
+        round = "Looking forward to the Weekend";
+    }
+    console.log(round);
+    return round;
+  };
+  
+pTimer = () => {
+    let time = 0;
+    setInterval(() => {
+      this.pIntervals(time);
+      time += 1000;
+      if (time > 486000) {
+        time = 0;
+      }
+    }, 1000);
+  };
+
+  // timeRemaining () {
+
+
+  //   return millis
+  // }
+
+  // function millisToMinutesAndSeconds(millis) {
+  //   var minutes = Math.floor(millis / 60000);
+  //   var seconds = ((millis % 60000) / 1000).toFixed(0);
+  //   return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  // }
+  
 
   render() {
     return (
@@ -101,7 +166,7 @@ export default class App extends Component {
         <Route
             exact
             path='/'
-            render={(props) => <Home {...props}  setUser={this.setUser} />}
+            render={(props) => <Home {...props}  setUser={this.setUser} todos={this.state.todos} toggleTodoDone={this.toggleTodoDone} removeTodo={this.removeTodo} pIntervals={this.pIntervals} pTimer={this.pTimer} />}
           />
           <Route
             path='/signup'
