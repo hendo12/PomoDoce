@@ -9,7 +9,7 @@ router.get("/whatever", (req, res, next) => {
   res.json({user:req.user})
 })
 
-router.get("/", (req, res, next) => {
+router.get("/loadAllTodos", isLoggedIn, (req, res, next) => { //load todosFromDb into this.state.todos
   console.log(req.query)
 })
 
@@ -25,5 +25,7 @@ router.post('/replaceAllTodos', isLoggedIn, (req, res, next) =>{
     })
   }).catch(err=>{ console.log(err) })
 })
+
+
 
 module.exports = router;

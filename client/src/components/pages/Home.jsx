@@ -22,14 +22,15 @@ export default class Home extends Component {
     return (
       <div className="Home">
         <div className="Timer">
-          <h3> 00:00</h3>
+          <h3> {this.props.timeLeft(this.props.timeRemaining)}</h3>
 
           <button onClick={this.props.pTimer}>Start</button>
           <button>Stop</button>
           <button>Reset</button>
         </div>
         <div className="Todo">
-          <h3>ToDo <TodoList todos={this.props.todos} toggleTodoDone={this.props.toggleTodoDone} removeTodo={this.props.removeTodo}/></h3>
+          <h3>ToDo</h3>
+          <TodoList todos={this.props.todos} toggleTodoDone={this.props.toggleTodoDone} removeTodo={this.props.removeTodo} />
         </div>
       </div>
     );

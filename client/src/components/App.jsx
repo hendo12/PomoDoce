@@ -12,7 +12,8 @@ export default class App extends Component {
     state = {
       user: {},
       newTodo: '',
-      todos: []
+      todos: [],
+      timeRemaining: 1500000 //1.5 mill ms = 25 min
     }
 /*---------------------------------------------------Todo Functionality-----------------------------------------------------*/
     newTodoChanged = (event) => {
@@ -42,19 +43,22 @@ export default class App extends Component {
       const todos = [...this.state.todos] //copy the array
       todos[index] = {...todos[index]} //copy the todo
       todos[index].done = event.target.checked //update done property on copied todo
+      axios.post('http://localhost:5000/api/replaceAllTodos', {todos}).then(res=>{
       this.setState({
         todos
       })
+      })
     }
+  
   
     removeTodo = (index) => {
       const todos = [...this.state.todos];
       todos.splice(index, 1);
-  
+      axios.post('http://localhost:5000/api/replaceAllTodos', {todos}).then(res=>{
       this.setState({
         todos
       })
-  
+      })
     }
   
     allDone = () => {
@@ -64,8 +68,10 @@ export default class App extends Component {
           done: true
         }
       })
+      axios.post('http://localhost:5000/api/replaceAllTodos', {todos}).then(res=>{
       this.setState({
         todos
+      })
       })
     }
   /*----------------------------------------------------User Login functionality------------------------------------------------*/
@@ -90,30 +96,33 @@ export default class App extends Component {
   /*----------------------------------------------------Timer functionality------------------------------------------------*/
 pIntervals = (time) => {
     var round;
-    console.log(time/1000, time < 2000);
+    //console.log(time/1000, time < 2000);
     switch (true) {
-      case time < 90000:
+      case time < 1500000: //25 mins of working
         round = "first";
+        this.setState({timeRemaining:300000})
         break;
-      case time < 108000:
+      case time < 1800000: //5 min break
         round = "second";
+        this.setState({timeRemaining:1500000})
         break;
-      case time < 198000:
+      case time < 3300000: //25 mins of working
         round = "third";
+        this.setState({timeRemaining:300000})
         break;
-      case time < 216000:
+      case time < 3600000: //5 min break
         round = "fourth";
         break;
-      case time < 306000:
+      case time < 5100000: //25 mins of working
         round = "fifth";
         break;
-      case time < 324000:
+      case time < 5400000: //5 min break
         round = "sixth";
         break;
-      case time < 414000:
+      case time < 6900000: //25 mins of working
         round = "7th";
         break;
-      case time < 486000:
+      case time < 8100000: //20 min break
         round = "8th";
         break;
       default: 
@@ -124,41 +133,38 @@ pIntervals = (time) => {
   };
   
 pTimer = () => {
-    let time = 0;
-    setInterval(() => {
-      this.pIntervals(time);
-      time += 1000;
-      if (time > 486000) {
-        time = 0;
-      }
-    }, 1000);
-  };
+  let time = 0;
+  let timeRemaining = this.state.timeRemaining;
+  setInterval(() => {
+    this.pIntervals(time);
+    time += 1000;
 
-  // timeRemaining () {
+    this.setState({timeRemaining:timeRemaining - time})
+    if (time > 8100000) {
+      time = 0;
+    }
+  }, 1000);
+};
 
+timeLeft (millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
 
-  //   return millis
-  // }
-
-  // function millisToMinutesAndSeconds(millis) {
-  //   var minutes = Math.floor(millis / 60000);
-  //   var seconds = ((millis % 60000) / 1000).toFixed(0);
-  //   return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-  // }
-  
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">PomoDoce</h1>
-          user: {this.state.user.username}
           <NavLink to="/" exact>Home</NavLink>
           {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
           {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
           {api.isLoggedIn() && <NavLink to="/profile">Profile</NavLink>}
           {api.isLoggedIn() && <NavLink to="/goals" >Goals</NavLink>}
           {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
+          {this.state.user.username}
         </header>
         <Switch>
 
@@ -166,7 +172,7 @@ pTimer = () => {
         <Route
             exact
             path='/'
-            render={(props) => <Home {...props}  setUser={this.setUser} todos={this.state.todos} toggleTodoDone={this.toggleTodoDone} removeTodo={this.removeTodo} pIntervals={this.pIntervals} pTimer={this.pTimer} />}
+            render={(props) => <Home {...props}  setUser={this.setUser} todos={this.state.todos} toggleTodoDone={this.toggleTodoDone} removeTodo={this.removeTodo} pIntervals={this.pIntervals} pTimer={this.pTimer} timeRemaining={this.state.timeRemaining} timeLeft={this.timeLeft} />}
           />
           <Route
             path='/signup'
