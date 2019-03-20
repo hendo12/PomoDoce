@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import CompletedTodos from '../CompletedTodos'
+import { SERVER_URL } from '../../config'
 import api from '../../api'
 
 export default class Profile extends Component {
@@ -9,7 +10,7 @@ export default class Profile extends Component {
     //console.log(api.isLoggedIn())
     //console.log(api.getLocalStorageUser())
 
-    Axios.get('http://localhost:5000/api/whatever',).then(res=>{
+    Axios.get(`${SERVER_URL}/whatever`,).then(res=>{
       // console.log(res)
     })
   }

@@ -7,6 +7,7 @@ import Goals from './pages/Goals';
 import Profile from './pages/Profile';
 import api from '../api';
 import axios from 'axios'
+import { SERVER_URL } from '../config'
 
 export default class App extends Component {
     state = {
@@ -32,7 +33,7 @@ export default class App extends Component {
         title: this.state.newTodo, 
         done: false
       }]
-      axios.post('http://localhost:5000/api/replaceAllTodos', {todos}).then(res=>{
+      axios.post(`${SERVER_URL}/replaceAllTodos`, {todos}).then(res=>{
 
         this.setState({
           newTodo: '',
@@ -46,7 +47,7 @@ export default class App extends Component {
       const todos = [...this.state.todos] //copy the array
       todos[index] = {...todos[index]} //copy the todo
       todos[index].done = event.target.checked //update done property on copied todo
-      axios.post('http://localhost:5000/api/replaceAllTodos', {todos}).then(res=>{
+      axios.post(`${SERVER_URL}/replaceAllTodos1`, {todos}).then(res=>{
         console.log(res, {todos})
       this.setState({
         todos
@@ -59,7 +60,7 @@ export default class App extends Component {
     removeTodo = (index) => {
       const todos = [...this.state.todos];
       todos.splice(index, 1);
-      axios.post('http://localhost:5000/api/replaceAllTodos', {todos}).then(res=>{
+      axios.post(`${SERVER_URL}/replaceAllTodos`, {todos}).then(res=>{
         this.setState({
         todos
         })
@@ -73,7 +74,7 @@ export default class App extends Component {
           done: true
         }
       })
-      axios.post('http://localhost:5000/api/replaceAllTodos', {todos}).then(res=>{
+      axios.post(`${SERVER_URL}/replaceAllTodos`, {todos}).then(res=>{
       this.setState({
         todos
       })
@@ -94,7 +95,7 @@ export default class App extends Component {
 
   setTodos = () => {
     let todosArray = [];
-    axios.get('http://localhost:5000/api/getAllTodos').then(res => {
+    axios.get(`${SERVER_URL}/getAllTodos`).then(res => {
       console.log(res)
       let todos = res.data.todoList.todos;
       todos.map((res, i) => {
@@ -109,7 +110,7 @@ export default class App extends Component {
 
   completedTodos = () => {
     let completedTodos= [];
-    axios.get('http://localhost:5000/api/getAllTodos').then(res => {
+    axios.get(`${SERVER_URL}/getAllTodos`).then(res => {
       let todos = res.data.todoList.todos;
 
       todos.map((res, i) => {
