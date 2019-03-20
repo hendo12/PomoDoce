@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import api from '../../api'
 import TodoList from '../TodoList';
+import CompletedTodos from '../CompletedTodos'
 
 export default class Home extends Component {
 
@@ -22,15 +23,23 @@ export default class Home extends Component {
     return (
       <div className="Home">
         <div className="Timer">
-          <h3> {this.props.timeLeft(this.props.timeRemaining)}</h3>
+          <h1> {this.props.timeLeft(this.props.timeRemaining)} </h1>
+          <h3> {this.props.round} </h3>
+          <p> {this.props.roundMessage} </p>
+          <br></br>
 
           <button onClick={this.props.pTimer}>Start</button>
           <button>Stop</button>
-          <button>Reset</button>
+          <button onClick={this.props.stopTimer}>Reset</button>
         </div>
         <div className="Todo">
           <h3>ToDo</h3>
           <TodoList todos={this.props.todos} toggleTodoDone={this.props.toggleTodoDone} removeTodo={this.props.removeTodo} />
+        </div>
+        <div className="completedTodos">
+          <h3>Completed Tasks</h3>
+          <CompletedTodos completedTodos={this.props.completedTodos} />
+
         </div>
       </div>
     );

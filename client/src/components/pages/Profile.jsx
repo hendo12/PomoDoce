@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import CompletedTodos from '../CompletedTodos'
 import api from '../../api'
 
 export default class Profile extends Component {
 
   componentDidMount(){
-
     //console.log(api.isLoggedIn())
     //console.log(api.getLocalStorageUser())
 
@@ -20,11 +20,7 @@ export default class Profile extends Component {
         <div className="CompletedGoals">
           <h1>Completed Goals</h1>
           <div>
-            <ol>
-              <li>Goal 1</li>
-              <li>Goal 2</li>
-              <li>Goal 3</li>
-            </ol>
+            <CompletedTodos completedTodos={this.props.completedTodos}/>
           </div>
           
         </div>

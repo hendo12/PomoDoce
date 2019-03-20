@@ -9,9 +9,14 @@ router.get("/whatever", (req, res, next) => {
   res.json({user:req.user})
 })
 
-router.get("/loadAllTodos", isLoggedIn, (req, res, next) => { //load todosFromDb into this.state.todos
+router.get("/getAllTodos", isLoggedIn, (req, res, next) => { //load todosFromDb into this.state.todos
   console.log(req.query)
+  TodoList.findOne({userId:req.user._id}).then((todoList) => {
+    res.json({todoList})
+  })
 })
+
+
 
 
 router.post('/replaceAllTodos', isLoggedIn, (req, res, next) =>{
