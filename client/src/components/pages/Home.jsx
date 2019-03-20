@@ -8,7 +8,7 @@ export default class Home extends Component {
 
   
   componentDidMount(){
-
+    
     //console.log(api.isLoggedIn())
     //console.log(api.getLocalStorageUser())
 

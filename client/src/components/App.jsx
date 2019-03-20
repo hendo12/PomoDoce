@@ -93,19 +93,29 @@ export default class App extends Component {
   }
 
   setTodos = () => {
+    let todosArray = [];
     axios.get('http://localhost:5000/api/getAllTodos').then(res => {
       console.log(res)
-      this.setState({todos:res.data.todoList.todos})
+      let todos = res.data.todoList.todos;
+      todos.map((res, i) => {
+        if(res.done === false) {
+          return todosArray.push(res);
+        }
+        return todosArray;
+      })
+      this.setState({todos:todosArray})
     })
   }
 
   completedTodos = () => {
-    let completedTodos = [];
+    let completedTodos= [];
     axios.get('http://localhost:5000/api/getAllTodos').then(res => {
-      res.data.todoList.todos.map((res) => {
-        console.log(res)
+      let todos = res.data.todoList.todos;
+
+      todos.map((res, i) => {
         if(res.done === true) {
-          return completedTodos.push(res);
+          console.log(res)
+          completedTodos.push(res);
         } 
         console.log(completedTodos)
         return completedTodos;
