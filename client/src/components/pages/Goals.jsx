@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
-import api from '../../api'
+//import Axios from 'axios';
+//import api from '../../api'
 import NewTodoForm from '../NewTodoForm';
 import TodoList from '../TodoList';
 

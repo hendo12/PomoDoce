@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import api from '../../api'
+//import api from '../../api'
 import TodoList from '../TodoList';
 import { SERVER_URL } from '../../config'
 import CompletedTodos from '../CompletedTodos'

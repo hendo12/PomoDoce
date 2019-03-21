@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import CompletedTodos from '../CompletedTodos'
 import { SERVER_URL } from '../../config'
-import api from '../../api'
+//import api from '../../api'
 
 export default class Profile extends Component {
 

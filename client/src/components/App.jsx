@@ -47,7 +47,7 @@ export default class App extends Component {
       const todos = [...this.state.todos] //copy the array
       todos[index] = {...todos[index]} //copy the todo
       todos[index].done = event.target.checked //update done property on copied todo
-      axios.post(`${SERVER_URL}/replaceAllTodos1`, {todos}).then(res=>{
+      axios.post(`${SERVER_URL}/replaceAllTodos`, {todos}).then(res=>{
         console.log(res, {todos})
       this.setState({
         todos
