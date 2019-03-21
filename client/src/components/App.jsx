@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import api from '../api';
 import axios from 'axios'
 import { SERVER_URL } from '../config'
+const ticktock = 10 //1000 is normal 
 
 export default class App extends Component {
     state = {
@@ -17,7 +18,8 @@ export default class App extends Component {
       completedTodos: [],
       timeRemaining: 1500000,
       rounds:{first:3000, second:5000, third:8000}, //1.5 mill ms = 25 min
-      roundMessage: ''
+      roundMessage: '',
+      time:0
     }
 /*---------------------------------------------------Todo Functionality-----------------------------------------------------*/
     newTodoChanged = (event) => {
@@ -75,9 +77,9 @@ export default class App extends Component {
         }
       })
       axios.post(`${SERVER_URL}/replaceAllTodos`, {todos}).then(res=>{
-      this.setState({
-        todos
-      })
+        this.setState({
+          todos
+        })
       })
     }
   /*----------------------------------------------------User Login functionality------------------------------------------------*/
@@ -225,28 +227,80 @@ pIntervals = (time) => {
     return round;
   };
   
-pTimer = () => {
-  let time = 0;
-  
-  setInterval(() => {
-    this.pIntervals(time);
-    time += 1000;
+// stopTimer = () => {
+//   console.log('stop ', this.state.timer)
+//   if(this.state.timer){ //pause it
+//     clearInterval(this.state.timer);
+//     clearInterval(this.state.pTime)
+//     this.setState({timer:null})
+//   } else { //unpause it 
+//     this.countDown(this.state.timeRemaining)
+//     //let t = this.state.time ? this.state.time : 0
+//     this.pTimer()
+//   }
+// }
+// pTimer = () => {
+//   // if (isNaN(time)){
+//   //   time = 0
+//   // }
+//   let time = this.state.time ? this.state.time : 0 
+//   //console.log(time)
+//   var pTime = setInterval(() => {
+//     this.pIntervals(time);
+//     time += 1000;
+//     this.setState({time:time}) //global time 
+//     if (time > 8100000) {
+//       time = 0;
+//     }
+//   }, ticktock);
+//   this.setState({pTime:pTime}) //id for pausing pTime 
 
-    if (time > 8100000) {
-      time = 0;
+// };
+
+
+
+toggleTimer = () => {
+  console.log('toggle')
+
+
+  if(!this.state.timer && !this.state.pTime) { //Play
+    let time = this.state.time;
+    //Start globalTime and countdown 
+    var pTime = setInterval(() => {
+      this.pIntervals(time);
+      time += 1000;
+      this.setState({time:time}) //global time 
+      if (time > 8100000) {
+        time = 0;
+      }
+    }, ticktock);
+    this.setState({pTime:pTime})
+    if(this.state.round){
+      this.countDown(this.state.timeRemaining)
     }
-  }, 1000);
-};
+  } else { //Pause 
+    clearInterval(this.state.timer)
+    clearInterval(this.state.pTime)
+    this.setState({timer: null, pTime: null})
+  }
+}
+
 
 countDown = (num) => {
+  console.log('countdown ',num)
     //var time = 5;
     var timer = setInterval(() =>{
       num-=1000;
-      this.resetTime(num);
+      this.setState({timeRemaining: num})
+      //this.resetTime(num);
       if (num === 0) {
+        console.log('clear', this.state.timer)
         clearInterval(timer);
+        
       }
-    }, 1000);
+    }, ticktock);
+    console.log(timer)
+    this.setState({timer:timer})
 }
 
 
@@ -282,7 +336,7 @@ resetTimer () {
         <Route
             exact
             path='/'
-            render={(props) => <Home {...props}  completedTodos={this.state.completedTodos} resetTimer={this.resetTimer} roundMessage={this.state.roundMessage} round={this.state.round} setUser={this.setUser} todos={this.state.todos} toggleTodoDone={this.toggleTodoDone} removeTodo={this.removeTodo} pIntervals={this.pIntervals} pTimer={this.pTimer} timeRemaining={this.state.timeRemaining} timeLeft={this.timeLeft} resetTimer={this.resetTimer} />}
+            render={(props) => <Home {...props} toggleTimer={this.toggleTimer} stopTimer={this.stopTimer} completedTodos={this.state.completedTodos} roundMessage={this.state.roundMessage} round={this.state.round} setUser={this.setUser} todos={this.state.todos} toggleTodoDone={this.toggleTodoDone} removeTodo={this.removeTodo} pIntervals={this.pIntervals} pTimer={this.pTimer} timeRemaining={this.state.timeRemaining} timeLeft={this.timeLeft} resetTimer={this.resetTimer} />}
           />
           <Route
             path='/signup'

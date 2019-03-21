@@ -28,10 +28,11 @@ export default class Home extends Component {
           <h3> {this.props.round} </h3>
           <p> {this.props.roundMessage} </p>
           <br></br>
+          <button onClick={this.props.toggleTimer}>Toggle</button>
 
           <button onClick={this.props.pTimer}>Start</button>
-          <button>Stop</button>
-          <button onClick={this.props.stopTimer}>Reset</button>
+          <button onClick={this.props.stopTimer}>Stop</button>
+          <button >Reset</button>
         </div>
         <div className="Todo">
           <h3>ToDo</h3>
