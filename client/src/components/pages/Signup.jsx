@@ -37,17 +37,20 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <div className="Signup">
-        <h2>Signup</h2>
-        <form>
-          Username: <input type="text" value={this.state.username} name="username" onChange={this.handleInputChange} /> <br />
-          Name: <input type="text" value={this.state.name} name="name" onChange={this.handleInputChange} /> <br />
-          Password: <input type="password" value={this.state.password} name="password" onChange={this.handleInputChange} /> <br />
-          <button onClick={(e) => this.handleClick(e)}>Signup</button>
-        </form>
-        {this.state.message && <div className="info info-danger">
-          {this.state.message}
-        </div>}
+      <div className="centerCard">
+        <div className="Signup bigCard card-container">
+          <h2 className="signupElements">Signup</h2>
+          <div>
+            <form className="signupElements">
+              Username: <input type="text" value={this.state.username} name="username" onChange={this.handleInputChange} /> <br />
+              Password: <input type="password" value={this.state.password} name="password" onChange={this.handleInputChange} /> <br />
+              <button onClick={(e) => this.handleClick(e)}>Signup</button>
+            </form>
+          </div>
+          {this.state.message && <div className="info info-danger">
+            {this.state.message}
+          </div>}
+        </div>
       </div>
     );
   }

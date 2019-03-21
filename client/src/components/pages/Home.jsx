@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { MDBBtn } from "mdbreact";
 import Axios from 'axios';
 //import api from '../../api'
 import TodoList from '../TodoList';
 import { SERVER_URL } from '../../config'
 import CompletedTodos from '../CompletedTodos'
+
 
 export default class Home extends Component {
 
@@ -22,27 +24,26 @@ export default class Home extends Component {
 
   render() {                
     return (
-      <div className="Home">
+      <div className="Home hugeCard">
         <div className="Timer">
-          <h1> {this.props.timeLeft(this.props.timeRemaining)} </h1>
+          <h1 className="time"> {this.props.timeLeft(this.props.timeRemaining)} </h1>
           <h3> {this.props.round} </h3>
           <p> {this.props.roundMessage} </p>
           <br></br>
-          <button onClick={this.props.toggleTimer}>Toggle</button>
-
-          <button onClick={this.props.pTimer}>Start</button>
-          <button onClick={this.props.stopTimer}>Stop</button>
-          <button >Reset</button>
+          <div className="btnCenter">
+            <button className="startBtn" onClick={this.props.toggleTimer}>Start/Pause</button>
+          </div>
         </div>
+
         <div className="Todo">
-          <h3>ToDo</h3>
+          <h3>Today's Tasks</h3>
           <TodoList todos={this.props.todos} toggleTodoDone={this.props.toggleTodoDone} removeTodo={this.props.removeTodo} />
         </div>
-        <div className="completedTodos">
+
+        {/* <div className="completedTodos">
           <h3>Completed Tasks</h3>
           <CompletedTodos completedTodos={this.props.completedTodos} />
-
-        </div>
+        </div> */}
       </div>
     );
   }

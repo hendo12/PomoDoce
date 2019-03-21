@@ -5,9 +5,13 @@ const TodoItem = (props) => {
 
   return (
     <li>
-      <input onChange={ (event) => props.toggleTodoDone(event, index)} type="checkbox" checked={todo.done}/>
-      <span className={todo.done ? "done" : ''}>{todo.title}</span>
-      <button onClick={ () => props.removeTodo(index)}>Delete</button>
+      <div className="card card-container">
+        <input className="todoCheck" onChange={ (event) => props.toggleTodoDone(event, index)} type="checkbox" checked={todo.done}/>
+        <span className={todo.done ? "done" : ''}>{todo.title.toUpperCase()}</span>
+        {/* <br></br>
+        <br></br> */}
+        <button className="deleteBtn" onClick={ () => props.removeTodo(index)}>Delete</button>
+      </div>
     </li>
   )
 }

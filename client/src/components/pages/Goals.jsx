@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-//import Axios from 'axios';
-//import api from '../../api'
+import { MDBBtn } from "mdbreact";
 import NewTodoForm from '../NewTodoForm';
 import TodoList from '../TodoList';
 
@@ -22,13 +21,14 @@ export default class Goals extends Component {
   render() { 
     return (
       <div className="Goals">
-        <h1>Goals</h1>
+        <h1>Add New Tasks</h1>
         <NewTodoForm 
+          className="todoForm"
           formSubmitted={this.props.formSubmitted} 
           newTodoChanged={this.props.newTodoChanged}
           newTodo={this.props.newTodo}
         />
-        <button onClick={() => this.props.allDone ()}>All Done</button>
+        <MDBBtn onClick={() => this.props.allDone ()}>All Done</MDBBtn>
         <TodoList 
           todos={this.props.todos}
           toggleTodoDone={this.props.toggleTodoDone}

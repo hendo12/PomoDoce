@@ -22,7 +22,7 @@ export default class CompletedTodos extends Component {
         {this.props.completedTodos.map((res, index) => {
             console.log(res)
             return(
-              <li key={index} className="done">
+              <li key={index} className="done card card-container">
                 {this.props.completedTodos[index].title}
               </li>
             )

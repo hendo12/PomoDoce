@@ -3,7 +3,7 @@ import TodoItem from "./TodoItem";
 
 const TodoList = props => {
   return (
-    <ul>
+    <ul className="todoList">
       {props.todos.map((todo, index) => {
         return (
           <TodoItem
@@ -12,6 +12,7 @@ const TodoList = props => {
             todo={todo}
             toggleTodoDone={props.toggleTodoDone}
             removeTodo={props.removeTodo}
+            className="todoItems"
           />
         );
       })}

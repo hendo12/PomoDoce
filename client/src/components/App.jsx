@@ -320,15 +320,13 @@ resetTimer () {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">PomoDoce</h1>
-          <NavLink to="/" exact>Home</NavLink>
-          {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
-          {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-          {api.isLoggedIn() && <NavLink to="/profile">Profile</NavLink>}
-          {api.isLoggedIn() && <NavLink to="/goals" >Goals</NavLink>}
-          {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
-          {this.state.user.username}
+        <header className="header">
+          <NavLink to="/" exact><h3 className="title headerElements">PomoDoce</h3></NavLink>
+          {!api.isLoggedIn() && <NavLink to="/signup" className="headerElements">Signup</NavLink>}
+          {!api.isLoggedIn() && <NavLink to="/login" className="headerElements">Login</NavLink>}
+          {api.isLoggedIn() && <NavLink to="/profile" className="headerElements">Profile</NavLink>}
+          {api.isLoggedIn() && <NavLink to="/goals" className="headerElements">Add Tasks</NavLink>}
+          {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout {this.state.user.username}</Link>}
         </header>
         <Switch>
 
