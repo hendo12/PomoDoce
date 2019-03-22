@@ -17,7 +17,7 @@ export default class Profile extends Component {
 
   render() {                
     return (
-      <div className="Profile">
+      <div className="Profile addCard">
         <div className="CompletedGoals">
           <h1>Completed Goals</h1>
           <div>

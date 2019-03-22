@@ -292,7 +292,7 @@ resetTimer () {
           {!api.isLoggedIn() && <NavLink to="/login" className="headerElements">Login</NavLink>}
           {api.isLoggedIn() && <NavLink to="/profile" className="headerElements">Profile</NavLink>}
           {api.isLoggedIn() && <NavLink to="/goals" className="headerElements">Add Tasks</NavLink>}
-          {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout {this.state.user.username}</Link>}
+          {api.isLoggedIn() && <Link to="/" className="headerElements" onClick={(e) => this.handleLogoutClick(e)}>Logout {this.state.user.username}</Link>}
         </header>
         <Switch>
           <Route

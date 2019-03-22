@@ -20,7 +20,7 @@ export default class Goals extends Component {
 
   render() { 
     return (
-      <div className="Goals">
+        <div className="Goals addCard">
         <h1>Add New Tasks</h1>
         <NewTodoForm 
           className="todoForm"
