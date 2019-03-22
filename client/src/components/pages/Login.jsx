@@ -34,8 +34,8 @@ export default class Login extends Component {
   render() {
     console.log()
     return (
-      <div className="centerCard">
-        <div className="Signup bigCard card-container">
+      <div className="centerCard signUpImage">
+        <div className="Signup bigCard card-container centerCard">
           <h2>Login</h2>
           <form className="signupElements">
             Username: <input type="text" value={this.state.username} name="username" onChange={this.handleInputChange} /> <br />

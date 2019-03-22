@@ -111,11 +111,12 @@ export default class App extends Component {
   }
 
   completedTodos = () => {
-    let completedTodos= [];
+    //let completedTodos= [];
+    let completedTodos = [...this.state.completedTodos];
     axios.get(`${SERVER_URL}/getAllTodos`).then(res => {
       if(!res.data.todoList){return}
 
-      let todos = res.data.todoList.todos;
+      let todos = [...res.data.todoList.todos];
 
       todos.map((res, i) => {
         if(res.done === true) {

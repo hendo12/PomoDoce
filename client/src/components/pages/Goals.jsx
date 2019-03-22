@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { MDBBtn } from "mdbreact";
 import NewTodoForm from '../NewTodoForm';
 import TodoList from '../TodoList';
 
@@ -28,7 +27,7 @@ export default class Goals extends Component {
           newTodoChanged={this.props.newTodoChanged}
           newTodo={this.props.newTodo}
         />
-        <MDBBtn onClick={() => this.props.allDone ()}>All Done</MDBBtn>
+        <button onClick={() => this.props.allDone ()}>All Done</button>
         <TodoList 
           todos={this.props.todos}
           toggleTodoDone={this.props.toggleTodoDone}

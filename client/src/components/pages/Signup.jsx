@@ -37,14 +37,14 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <div className="centerCard">
-        <div className="Signup bigCard card-container">
+      <div className="centerCard signUpImage">
+        <div className="Signup bigCard card-container centerCard">
           <h2 className="signupElements">Signup</h2>
           <div>
             <form className="signupElements">
               Username: <input type="text" value={this.state.username} name="username" onChange={this.handleInputChange} /> <br />
               Password: <input type="password" value={this.state.password} name="password" onChange={this.handleInputChange} /> <br />
-              <button onClick={(e) => this.handleClick(e)}>Signup</button>
+              <button className="btnCenter" onClick={(e) => this.handleClick(e)}>Signup</button>
             </form>
           </div>
           {this.state.message && <div className="info info-danger">

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { MDBBtn } from "mdbreact";
 import Axios from 'axios';
-//import api from '../../api'
 import TodoList from '../TodoList';
 import { SERVER_URL } from '../../config'
-import CompletedTodos from '../CompletedTodos'
+
 
 
 export default class Home extends Component {

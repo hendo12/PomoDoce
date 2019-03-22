@@ -8,7 +8,7 @@
    margin: 0;
    padding: 0;
    font-family: sans-serif;
-   background-image: url('../')
+   background-color: #cedde2;
  }
 
 ul li {
@@ -22,8 +22,8 @@ ul li {
    justify-content: flex-start;
    padding: 10px 0;
    text-decoration: none;
-   background-color: #65ADF5;
-     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+   background-color: #E85A66;
+   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
  }
 
 .headerElements {
@@ -32,7 +32,8 @@ ul li {
 
 .headerElements, .headerElements h3, .headerElements Link, NavLink {
   text-decoration: none;
-  color: black;
+  color: white;
+  /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
 }
 
 .card {
@@ -43,6 +44,8 @@ ul li {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  border-radius: 5px;
+  background-color: white;
 }
 
  .card span {
@@ -84,12 +87,12 @@ ul li {
  }
 
  .startBtn {
-   background-color: #508B46;
+   background-color: #77dd77;
    width: 150px;
  }
 
  .deleteBtn {
-   background-color: #E03616;
+   background-color: #E84855;
  }
 
  .todoCheck {
@@ -170,8 +173,17 @@ ul li {
  .Signup {
    display: flex;
    flex-direction: column;
-   background-image: url("./")
+   background-color: white;
+   border-radius: 10px;
+   height: 150px;
  }
+
+  .signUpImage {
+    background-image: url("./images/productivity-background.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 800px;
+  }
 
  .signupElements{
    padding: 5px 0px;
@@ -186,6 +198,7 @@ ul li {
    display: flex;
    justify-content: space-evenly;
    align-items: center;
+   background-color: white;
  }
 
  .hugeCard {
@@ -196,8 +209,9 @@ ul li {
      margin: 25px 50px;
      display: flex;
      min-height: 80%;
-      justify-content: space-evenly;
-      align-items: center; 
+     justify-content: space-evenly;
+     align-items: center; 
+     background-color: white;
  }
 
  .addCard {
@@ -211,6 +225,7 @@ ul li {
     min-height: 80%;
     justify-content: space-evenly;
     align-items: center; 
+    background-color: white;
 }
       
       
