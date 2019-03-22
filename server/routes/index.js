@@ -23,8 +23,8 @@ router.post('/replaceAllTodos', isLoggedIn, (req, res, next) =>{
   console.log('replace todos from user', req.user ,' with req.body',req.body)
   TodoList.findOneAndUpdate({
     userId:req.user._id
-  }, {}, {upsert:true}).then(todoList => {
-    todoList.todos = req.body.todos
+  }, {$set: {todos:req.body.todos}}, {upsert:true}).then(todoList => {
+    //todoList.todos = req.body.todos
     todoList.save(()=>{
       res.json({success:true})
     })
