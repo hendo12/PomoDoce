@@ -213,7 +213,7 @@ pIntervals = (time) => {
       case time < 8100000: //20 min break
         round = "Eigth Round";
         roundMessage = 'Way to go champ! Take that longer break and treat yoself!';
-        if(this.state.round!=="Eigth Round"){
+        if(this.state.round!=="Eighth Round"){
           this.countDown(1200000)
         }
         break;
