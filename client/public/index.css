@@ -222,4 +222,5 @@ ul li {
  .taskInput {
   padding: 5px 10px;
   margin:  20px;
+  border-radius: 5px;
  }
