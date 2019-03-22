@@ -11,16 +11,16 @@ import { SERVER_URL } from '../config'
 const ticktock = 10 //1000 is normal 
 
 export default class App extends Component {
-    state = {
-      user: {},
-      newTodo: '',
-      todos: [],
-      completedTodos: [],
-      timeRemaining: 1500000,
-      rounds:{first:3000, second:5000, third:8000}, //1.5 mill ms = 25 min
-      roundMessage: '',
-      time:0
-    }
+  state = {
+    user: {},
+    newTodo: '',
+    todos: [],
+    completedTodos: [],
+    timeRemaining: 1500000,
+    rounds:{first:3000, second:5000, third:8000}, //1.5 mill ms = 25 min
+    roundMessage: '',
+    time:0
+}
 /*---------------------------------------------------Todo Functionality-----------------------------------------------------*/
     newTodoChanged = (event) => {
       this.setState({
@@ -57,7 +57,6 @@ export default class App extends Component {
       this.completedTodos();
       })
     }
-  
   
     removeTodo = (index) => {
       const todos = [...this.state.todos];
@@ -99,6 +98,7 @@ export default class App extends Component {
     let todosArray = [];
     axios.get(`${SERVER_URL}/getAllTodos`).then(res => {
       console.log(res)
+      if(!res.data.todoList){return}
       let todos = res.data.todoList.todos;
       todos.map((res, i) => {
         if(res.done === false) {
@@ -113,6 +113,8 @@ export default class App extends Component {
   completedTodos = () => {
     let completedTodos= [];
     axios.get(`${SERVER_URL}/getAllTodos`).then(res => {
+      if(!res.data.todoList){return}
+
       let todos = res.data.todoList.todos;
 
       todos.map((res, i) => {
@@ -226,42 +228,9 @@ pIntervals = (time) => {
     console.log(round);
     return round;
   };
-  
-// stopTimer = () => {
-//   console.log('stop ', this.state.timer)
-//   if(this.state.timer){ //pause it
-//     clearInterval(this.state.timer);
-//     clearInterval(this.state.pTime)
-//     this.setState({timer:null})
-//   } else { //unpause it 
-//     this.countDown(this.state.timeRemaining)
-//     //let t = this.state.time ? this.state.time : 0
-//     this.pTimer()
-//   }
-// }
-// pTimer = () => {
-//   // if (isNaN(time)){
-//   //   time = 0
-//   // }
-//   let time = this.state.time ? this.state.time : 0 
-//   //console.log(time)
-//   var pTime = setInterval(() => {
-//     this.pIntervals(time);
-//     time += 1000;
-//     this.setState({time:time}) //global time 
-//     if (time > 8100000) {
-//       time = 0;
-//     }
-//   }, ticktock);
-//   this.setState({pTime:pTime}) //id for pausing pTime 
-
-// };
-
-
 
 toggleTimer = () => {
   console.log('toggle')
-
 
   if(!this.state.timer && !this.state.pTime) { //Play
     let time = this.state.time;
@@ -285,7 +254,6 @@ toggleTimer = () => {
   }
 }
 
-
 countDown = (num) => {
   console.log('countdown ',num)
     //var time = 5;
@@ -303,7 +271,6 @@ countDown = (num) => {
     this.setState({timer:timer})
 }
 
-
 timeLeft (millis) {
   var minutes = Math.floor(millis / 60000);
   var seconds = ((millis % 60000) / 1000).toFixed(0);
@@ -315,7 +282,6 @@ resetTimer () {
   //also need to reset time variable within the pTimer function???? HOW????
   console.log('Timer reset')
 }
-
 
   render() {
     return (
@@ -329,55 +295,30 @@ resetTimer () {
           {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout {this.state.user.username}</Link>}
         </header>
         <Switch>
-
-
-        <Route
-            exact
-            path='/'
-            render={(props) => <Home {...props} toggleTimer={this.toggleTimer} stopTimer={this.stopTimer} completedTodos={this.state.completedTodos} roundMessage={this.state.roundMessage} round={this.state.round} setUser={this.setUser} todos={this.state.todos} toggleTodoDone={this.toggleTodoDone} removeTodo={this.removeTodo} pIntervals={this.pIntervals} pTimer={this.pTimer} timeRemaining={this.state.timeRemaining} timeLeft={this.timeLeft} resetTimer={this.resetTimer} />}
-          />
           <Route
-            path='/signup'
-            render={(props) => <Signup {...props} setUser={this.setUser} />}
-          />
-          <Route
-            path='/login'
-            render={(props) => <Login {...props} setUser={this.setUser} setTodos={this.setTodos}/>}
-          />
-          <Route
-            path='/goals'
-            render={(props) => <Goals {...props} setUser={this.setUser}  newTodoChanged={this.newTodoChanged} formSubmitted={this.formSubmitted} toggleTodoDone={this.toggleTodoDone} removeTodo={this.removeTodo} allDone={this.allDone} todos={this.state.todos} newTodo={this.state.newTodo} />}
-          />
-          <Route
-            path='/profile'
-            render={(props) => <Profile {...props} refreshCompletedTodos={this.completedTodos} completedTodos={this.state.completedTodos} setUser={this.setUser}/>}
-          />
-          
-          
-          <Route render={() => <h2>404</h2>} />
-
-
+              exact
+              path='/'
+              render={(props) => <Home {...props} toggleTimer={this.toggleTimer} stopTimer={this.stopTimer} completedTodos={this.state.completedTodos} roundMessage={this.state.roundMessage} round={this.state.round} setUser={this.setUser} todos={this.state.todos} toggleTodoDone={this.toggleTodoDone} removeTodo={this.removeTodo} pIntervals={this.pIntervals} pTimer={this.pTimer} timeRemaining={this.state.timeRemaining} timeLeft={this.timeLeft} resetTimer={this.resetTimer} />}
+            />
+            <Route
+              path='/signup'
+              render={(props) => <Signup {...props} setUser={this.setUser} />}
+            />
+            <Route
+              path='/login'
+              render={(props) => <Login {...props} setUser={this.setUser} setTodos={this.setTodos}/>}
+            />
+            <Route
+              path='/goals'
+              render={(props) => <Goals {...props} setUser={this.setUser}  newTodoChanged={this.newTodoChanged} formSubmitted={this.formSubmitted} toggleTodoDone={this.toggleTodoDone} removeTodo={this.removeTodo} allDone={this.allDone} todos={this.state.todos} newTodo={this.state.newTodo} />}
+            />
+            <Route
+              path='/profile'
+              render={(props) => <Profile {...props} refreshCompletedTodos={this.completedTodos} completedTodos={this.state.completedTodos} setUser={this.setUser}/>}
+            />
+            <Route render={() => <h2>404</h2>} />
         </Switch>
-
-        {/* <Goals 
-          additem={this.addItem} 
-          inputElement={this.inputElement}
-
-        /> */}
       </div>
     );
   }
 }
-
-/*          <Route
-            path='/'
-            render={(props) => <Home {...props} setUser={this.setUser} />}
-          />
-          <Route
-            path='/signup'
-            render={(props) => <Signup {...props} setUser={this.setUser} />}
-          />
-          <Route
-            path='/login'
-            render={(props) => <Login {...props} setUser={this.setUser}/>}
-          />*/
