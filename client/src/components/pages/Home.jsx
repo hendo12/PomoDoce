@@ -29,7 +29,7 @@ export default class Home extends Component {
           <p> {this.props.roundMessage} </p>
           <br></br>
           <div className="btnCenter">
-            <button className="startBtn" onClick={this.props.toggleTimer}>Start/Pause</button>
+            <button className="startBtn card" onClick={this.props.toggleTimer}>Start/Pause</button>
           </div>
         </div>
 

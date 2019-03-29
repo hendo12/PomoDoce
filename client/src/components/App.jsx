@@ -283,7 +283,7 @@ timeLeft (millis) {
     return (
       <div className="App">
         <header className="header">
-          <NavLink to="/" exact><h3 className="title headerElements">PomoDoce</h3></NavLink>
+          <NavLink to="/" exact><h3 className="headerElements">PomoDoce</h3></NavLink>
           {!api.isLoggedIn() && <NavLink to="/signup" className="headerElements">Signup</NavLink>}
           {!api.isLoggedIn() && <NavLink to="/login" className="headerElements">Login</NavLink>}
           {api.isLoggedIn() && <NavLink to="/profile" className="headerElements">Profile</NavLink>}
