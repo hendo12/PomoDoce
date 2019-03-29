@@ -20,7 +20,7 @@ export default class App extends Component {
     rounds:{first:3000, second:5000, third:8000}, //1.5 mill ms = 25 min
     roundMessage: '',
     time:0
-}
+  }
 /*---------------------------------------------------Todo Functionality-----------------------------------------------------*/
     newTodoChanged = (event) => {
       this.setState({
@@ -278,11 +278,6 @@ timeLeft (millis) {
   return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
 
-resetTimer () {
-  //this.setState({timeRemaining: 1500000 })
-  //also need to reset time variable within the pTimer function???? HOW????
-  console.log('Timer reset')
-}
 
   render() {
     return (
