@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Goals from './pages/Goals';
 import Profile from './pages/Profile';
+import Contact from './pages/Contact';
 import api from '../api';
 import axios from 'axios'
 import { SERVER_URL } from '../config'
@@ -232,13 +233,13 @@ pIntervals = (time) => {
 
 toggleTimer = () => {
   console.log('toggle')
-
+                                                      //controls internal timer, time += 10 for normal speed
   if(!this.state.timer && !this.state.pTime) { //Play
     let time = this.state.time;
     //Start globalTime and countdown 
     var pTime = setInterval(() => {
       this.pIntervals(time);
-      time += 1000;
+      time += 10;
       this.setState({time:time}) //global time 
       if (time > 8100000) {
         time = 0;
@@ -255,11 +256,11 @@ toggleTimer = () => {
   }
 }
 
-countDown = (num) => {
+countDown = (num) => {            //Controls the visible countdown on front end. num -= 10 is normal speed. 
   console.log('countdown ',num)
     //var time = 5;
     var timer = setInterval(() =>{
-      num-=1000;
+      num-=10; 
       this.setState({timeRemaining: num})
       //this.resetTime(num);
       if (num === 0) {
@@ -275,6 +276,7 @@ countDown = (num) => {
 timeLeft (millis) {
   var minutes = Math.floor(millis / 60000);
   var seconds = ((millis % 60000) / 1000).toFixed(0);
+
   return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
 
@@ -289,6 +291,7 @@ timeLeft (millis) {
           {api.isLoggedIn() && <NavLink to="/profile" className="headerElements">Profile</NavLink>}
           {api.isLoggedIn() && <NavLink to="/goals" className="headerElements">Add Tasks</NavLink>}
           {api.isLoggedIn() && <Link to="/" className="headerElements" onClick={(e) => this.handleLogoutClick(e)}>Logout {this.state.user.username}</Link>}
+          <NavLink to="/contact" exact><h3 className="headerElements">Contact</h3></NavLink>
         </header>
         <Switch>
           <Route
