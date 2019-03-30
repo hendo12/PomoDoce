@@ -199,7 +199,7 @@ pIntervals = (time) => {
         break;
       case time < 5400000: //5 min break
         round = "Sixth Round";
-        roundMessage = 'Running through these tasks like a DOCTA! Now relax a bit.';
+        roundMessage = '*Joey Diaz voice*: Running through these tasks like a DOCTA! Now relax a bit.';
         if(this.state.round!=="Sixth Round"){
           this.countDown(300000)
         }
@@ -290,8 +290,8 @@ timeLeft (millis) {
           {!api.isLoggedIn() && <NavLink to="/login" className="headerElements">Login</NavLink>}
           {api.isLoggedIn() && <NavLink to="/profile" className="headerElements">Profile</NavLink>}
           {api.isLoggedIn() && <NavLink to="/goals" className="headerElements">Add Tasks</NavLink>}
+          <NavLink to="/about" className="headerElements">About</NavLink>
           {api.isLoggedIn() && <Link to="/" className="headerElements" onClick={(e) => this.handleLogoutClick(e)}>Logout {this.state.user.username}</Link>}
-          <NavLink to="/contact" className="headerElements">Contact</NavLink>
         </header>
         <Switch>
           <Route
@@ -316,7 +316,7 @@ timeLeft (millis) {
               render={(props) => <Profile {...props} refreshCompletedTodos={this.completedTodos} completedTodos={this.state.completedTodos} setUser={this.setUser}/>}
             />
             <Route
-              path='/contact'
+              path='/about'
               render={(props) => <Contact {...props} setUser={this.setUser} />}
             />
             <Route render={() => <h2>404</h2>} />

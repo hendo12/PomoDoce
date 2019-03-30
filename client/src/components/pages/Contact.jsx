@@ -27,10 +27,13 @@ export default class Contact extends Component {
            I'm a cryptocurrency enthusiast, digital privacy advocate, 
            two time award winning dancer (at my gym and at Ironhack's Web Dev bootcamp), and Seinfeld is 
            the greatest show to date.
+        <p/>
 
            <br></br>
            <br></br>
 
+        <h3>About PomoDoce</h3> 
+      
            PomoDoce is a time management and todo list app which implements the Pomodoro technique to maximize user productivity 
            and accountability. The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 
            1980s. The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by 
@@ -45,7 +48,7 @@ export default class Contact extends Component {
           <h3>Contact</h3>
 
           <br></br>
-          
+
           <div>
             <label>Email: </label>
             <a href = "mailto: henrydoce@protonmail.com">henrydoce@protonmail.com</a>

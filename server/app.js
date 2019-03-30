@@ -23,11 +23,11 @@ app.use(nocache())
 
 // Set "Access-Control-Allow-Origin" header
 app.use(cors({
-  origin: (origin, cb) => {
-    cb(null, origin && origin.startsWith('http://localhost:'))
-  },
-  optionsSuccessStatus: 200,
-  credentials: true
+  // origin: (origin, cb) => {
+  //   cb(null, origin && origin.startsWith('http://localhost:'))
+  // },
+  // optionsSuccessStatus: 200,
+  // credentials: true
 }))
 app.use(logger('dev'))
 app.use(bodyParser.json())
