@@ -41,7 +41,12 @@ ul li {
    text-decoration: none;
 }
 
- .header {
+.title {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.header {
    display: flex;
    align-items: center;
    justify-content: flex-start;
@@ -248,4 +253,18 @@ ul li {
   padding: 5px 10px;
   margin:  20px;
   border-radius: 5px;
+ }
+
+ .contact img {
+   width: 30%;
+   height: auto;
+ }
+
+ .contact {
+   text-align: center;
+ }
+
+ .socialLinks { 
+   display: flex;
+   justify-content: space-around;
  }

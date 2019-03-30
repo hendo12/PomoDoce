@@ -285,7 +285,7 @@ timeLeft (millis) {
     return (
       <div className="App">
         <header className="header">
-          <NavLink to="/" exact className="headerElements">PomoDoce</NavLink>
+          <NavLink to="/" exact className="headerElements title">PomoDoce</NavLink>
           {!api.isLoggedIn() && <NavLink to="/signup" className="headerElements">Signup</NavLink>}
           {!api.isLoggedIn() && <NavLink to="/login" className="headerElements">Login</NavLink>}
           {api.isLoggedIn() && <NavLink to="/profile" className="headerElements">Profile</NavLink>}
@@ -314,6 +314,10 @@ timeLeft (millis) {
             <Route
               path='/profile'
               render={(props) => <Profile {...props} refreshCompletedTodos={this.completedTodos} completedTodos={this.state.completedTodos} setUser={this.setUser}/>}
+            />
+            <Route
+              path='/contact'
+              render={(props) => <Contact {...props} setUser={this.setUser} />}
             />
             <Route render={() => <h2>404</h2>} />
         </Switch>
